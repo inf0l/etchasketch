@@ -1,7 +1,6 @@
-let gridSize = 15;
+let gridSide = 15;
 
 const html = document.querySelector('html');
-const body = document.querySelector('body');
 const header = document.querySelector('header');
 
 const container = document.querySelector('#container');
@@ -52,12 +51,12 @@ restart.addEventListener('click', () => {
     while (container.firstChild) {
 	container.removeChild(container.firstChild);
     }
-    gridSize = prompt('How many squares per side would you like?', 15);
-    if (0 < gridSize && gridSize < 101) {
-	drawGrid(gridSize);
+    gridSide = prompt('How many squares per side would you like?', 15);
+    if (0 < gridSide && gridSide < 101) {
+	drawGrid(gridSide);
     } else {
 	alert('Invalid input. Resetting to 15x15');
-	drawGrid(4);
+	drawGrid(15);
     }
 });
 
@@ -65,11 +64,12 @@ header.appendChild(title);
 header.appendChild(restart);
 
 function drawGrid(n) {
+    let pixelWidth = 100 / n;
     for (let i = 0; i < n * n; i++) {
 	const square = document.createElement('div');
 	square.id = 'square' + (i + 1);
 	square.className = 'square';
-	square.style = `flex-basis: ` + 100 / gridSize + `%; width: ` + 100 / gridSize + `%; padding-bottom: ` + 100 / gridSize + `%`;
+	square.style = `flex-basis: ` + pixelWidth + `%; width: ` + pixelWidth + `%; padding-bottom: ` + pixelWidth + `%`;
 	square.addEventListener('mouseover', () => {
 	    square.style.background = '#2e2e2e';
 	})
@@ -78,4 +78,4 @@ function drawGrid(n) {
     }
 }
 
-drawGrid(gridSize);
+drawGrid(gridSide);
